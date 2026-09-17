@@ -198,14 +198,16 @@ body.web .main, body.web .guide { height: auto; min-height: calc(100% - var(--he
    ===================================================================== */
 @media (max-width: 700px) {
   :root { --header-h: 56px; --nav-h: 64px; }
-  body, body.web { overflow: auto; -webkit-overflow-scrolling: touch; }
+  /* Let the document scroll (not the body): iOS Safari only pins position:fixed reliably then. */
+  html, body, body.web { height: auto; min-height: 100%; overflow: visible; }
+  body { overscroll-behavior-y: none; }
 
   .titlebar { position: sticky; top: 0; z-index: 10; height: var(--header-h); padding: 0 16px; -webkit-app-region: no-drag; }
   .brand { font-size: 20px; }
   .titlebar .actions { display: none; }
 
   .mobile-nav {
-    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; transform: translateZ(0);
     height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding: 0 8px env(safe-area-inset-bottom);
     background: var(--card); border-top: 1px solid var(--border);
   }
@@ -219,7 +221,7 @@ body.web .main, body.web .guide { height: auto; min-height: calc(100% - var(--he
 
   .uploader, .main, .guide { height: auto; min-height: 0; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px); }
   .uploader { padding: 16px 16px calc(var(--nav-h) + 24px); align-items: stretch; }
-  .upload-card { aspect-ratio: auto; min-height: calc(100vh - var(--header-h) - var(--nav-h) - 32px); padding: 32px 20px; }
+  .upload-card { aspect-ratio: auto; min-height: calc(100vh - var(--header-h) - var(--nav-h) - 32px); min-height: calc(100dvh - var(--header-h) - var(--nav-h) - 32px); padding: 32px 20px; }
   .upload-title { font-size: 22px; }
   .upload-desc { font-size: 14px; margin-bottom: 24px; }
   .upload-foot { font-size: 12px; }
