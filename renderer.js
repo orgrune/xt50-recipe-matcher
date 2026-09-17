@@ -114,7 +114,7 @@
     $('heroName').textContent = R.filmSim.name;
     const dial = $('heroDial');
     dial.textContent = R.filmSim.onDial ? 'On the dial' : 'Not on the dial';
-    dial.title = R.filmSim.onDial ? 'This simulation has its own position on the Film Simulation dial.' : 'Assign it to FS1, FS2 or FS3, or turn the dial to C (the last click after FS3) and choose it under IQ › FILM SIMULATION.';
+    dial.title = R.filmSim.onDial ? 'This simulation has its own position on the Film Simulation dial.' : 'Assign it to FS1, FS2 or FS3, or turn the dial to C (the plain letter between STD and FS3) and choose it under IQ › FILM SIMULATION.';
     $('heroDesc').textContent = R.filmSim.desc;
     $('confFill').style.width = `${Math.round(R.confidence * 100)}%`;
     $('confText').textContent = `${Math.round(R.confidence * 100)}% fit`;
