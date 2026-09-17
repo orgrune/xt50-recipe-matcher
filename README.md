@@ -4,7 +4,7 @@ Drop in a photo whose look you want to reproduce and it tells you which Fujifilm
 
 **Use it in the browser:** https://orgrune.github.io/xt50-recipe-matcher/ (installable as a PWA, works offline after the first visit). Or run it as a macOS desktop app (Electron).
 
-Everything is computed locally from the pixels in your browser or on your Mac. No uploads, no network calls, no API keys. Your current camera settings are cached in the browser's local storage on the device you use.
+Everything is computed locally from the pixels on your Mac or phone. No uploads, no network calls, no API keys. Your current camera settings are cached in the browser's local storage on the device you use.
 
 ## Run it
 
