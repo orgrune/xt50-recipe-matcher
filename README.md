@@ -6,7 +6,15 @@ Drop in a photo whose look you want to reproduce and it tells you which Fujifilm
 
 Everything is computed locally from the pixels on your Mac or phone. No uploads, no network calls, no API keys. Your current camera settings are cached in the browser's local storage on the device you use.
 
-## Run it
+## Download
+
+Grab the latest DMG from the [Releases page](https://github.com/orgrune/xt50-recipe-matcher/releases) (Apple Silicon and Intel builds). The app is not code-signed, so on first launch right-click it and choose Open, or run once:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/X-T50 Recipe Matcher.app"
+```
+
+## Run it from source
 
 ```bash
 npm install
@@ -41,6 +49,16 @@ Click "My current settings" to see or edit what the app thinks your camera is se
 ## Guide screen
 
 The Guide button opens a walkthrough built from the current recipe: the exact dial and Q-menu moves to set the look in the field, how to save it into one of the seven custom settings banks (C1–C7) and recall it, and a cheat sheet of which film simulations have fixed positions on the Film Simulation dial versus the FS1–FS3 slots. The table then marks each row keep or change, and "Copy recipe" puts the whole thing on the clipboard.
+
+## Releasing
+
+Releases are built by GitHub Actions. Bump the version in `package.json`, then push a tag:
+
+```bash
+git tag v1.0.1 && git push origin v1.0.1
+```
+
+The workflow builds the DMG and zip for both architectures on a macOS runner and attaches them to a GitHub Release with generated notes.
 
 ## Web app
 

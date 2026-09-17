@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --mac --dir",
-    "icon": "electron scripts/render-icon.js && ./scripts/make-icns.sh"
+    "icon": "electron scripts/render-icon.js && ./scripts/make-icns.sh",
+    "release": "electron-builder --mac --arm64 --x64 --publish never"
   },
   "author": "Or Grunebaum",
   "license": "MIT",
@@ -36,7 +37,20 @@
     "mac": {
       "category": "public.app-category.photography",
       "target": [
-        "dir"
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
       ],
       "identity": null,
       "icon": "build/icon.icns"
@@ -44,6 +58,10 @@
     "directories": {
       "output": "dist",
       "buildResources": "build"
+    },
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "dmg": {
+      "sign": false
     }
   },
   "repository": {
