@@ -1,0 +1,14 @@
+{
+  "name": "X-T50 Recipe Matcher",
+  "short_name": "X-T50 Recipe",
+  "description": "Drop an image, get the Fujifilm X-T50 settings that match its colour profile. Runs entirely in your browser.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f2ee",
+  "theme_color": "#f4f2ee",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

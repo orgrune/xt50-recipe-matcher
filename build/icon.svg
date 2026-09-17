@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset="1" stop-color="#121212"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3a3a"/>
+      <stop offset="1" stop-color="#1c1c1c"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0d48a"/>
+      <stop offset="0.5" stop-color="#d7b46a"/>
+      <stop offset="1" stop-color="#9a7a3a"/>
+    </linearGradient>
+    <radialGradient id="glass" cx="0.38" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#6fb7a5"/>
+      <stop offset="0.45" stop-color="#1f4f48"/>
+      <stop offset="1" stop-color="#0a1a18"/>
+    </radialGradient>
+    <radialGradient id="glint" cx="0.3" cy="0.28" r="0.35">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="squircle"><path d="M512 100c258 0 412 154 412 412s-154 412-412 412S100 770 100 512 254 100 512 100z"/></clipPath>
+  </defs>
+
+  <!-- macOS squircle background -->
+  <path d="M512 100c258 0 412 154 412 412s-154 412-412 412S100 770 100 512 254 100 512 100z" fill="url(#bg)"/>
+  <g clip-path="url(#squircle)">
+    <circle cx="512" cy="540" r="470" fill="#d7b46a" opacity="0.05"/>
+  </g>
+
+  <!-- top plate with dials -->
+  <rect x="236" y="318" width="552" height="90" rx="26" fill="#2b2b2b"/>
+  <rect x="236" y="318" width="552" height="90" rx="26" fill="none" stroke="#454545" stroke-width="4"/>
+  <!-- film simulation dial (left) -->
+  <circle cx="318" cy="350" r="46" fill="url(#brass)"/>
+  <circle cx="318" cy="350" r="46" fill="none" stroke="#5c4a20" stroke-width="3"/>
+  <g stroke="#3a2e12" stroke-width="5" stroke-linecap="round">
+    <line x1="318" y1="316" x2="318" y2="326"/><line x1="342" y1="326" x2="336" y2="333"/><line x1="352" y1="350" x2="342" y2="350"/>
+    <line x1="294" y1="326" x2="300" y2="333"/><line x1="284" y1="350" x2="294" y2="350"/>
+  </g>
+  <!-- shutter button + exposure dial (right) -->
+  <circle cx="652" cy="352" r="30" fill="#3d3d3d" stroke="#555" stroke-width="3"/>
+  <circle cx="652" cy="352" r="14" fill="#d7b46a"/>
+  <circle cx="738" cy="350" r="40" fill="#333" stroke="#555" stroke-width="3"/>
+  <g stroke="#777" stroke-width="4" stroke-linecap="round">
+    <line x1="738" y1="318" x2="738" y2="326"/><line x1="770" y1="350" x2="762" y2="350"/><line x1="706" y1="350" x2="714" y2="350"/>
+  </g>
+
+  <!-- body -->
+  <rect x="180" y="392" width="664" height="380" rx="56" fill="url(#body)"/>
+  <rect x="180" y="392" width="664" height="380" rx="56" fill="none" stroke="#4a4a4a" stroke-width="5"/>
+  <!-- leatherette -->
+  <rect x="204" y="452" width="150" height="290" rx="22" fill="#151515"/>
+  <rect x="670" y="452" width="150" height="290" rx="22" fill="#151515"/>
+  <!-- viewfinder hump -->
+  <path d="M452 392 L468 356 Q472 346 484 346 H540 Q552 346 556 356 L572 392 Z" fill="#2b2b2b" stroke="#4a4a4a" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- lens -->
+  <circle cx="512" cy="586" r="172" fill="#0f0f0f"/>
+  <circle cx="512" cy="586" r="172" fill="none" stroke="url(#brass)" stroke-width="16"/>
+  <circle cx="512" cy="586" r="146" fill="#1b1b1b" stroke="#2f2f2f" stroke-width="4"/>
+  <circle cx="512" cy="586" r="118" fill="#101010" stroke="#c9a85c" stroke-width="6"/>
+  <circle cx="512" cy="586" r="96" fill="url(#glass)"/>
+  <circle cx="512" cy="586" r="96" fill="url(#glint)"/>
+  <circle cx="512" cy="586" r="34" fill="#071110" opacity="0.9"/>
+  <ellipse cx="478" cy="548" rx="26" ry="14" fill="#ffffff" opacity="0.55" transform="rotate(-30 478 548)"/>
+</svg>

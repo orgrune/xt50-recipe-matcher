@@ -1,0 +1,54 @@
+{
+  "name": "xt50-recipe-matcher",
+  "version": "1.0.0",
+  "description": "Drop an image, get Fujifilm X-T50 settings that match its color profile",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac --dir",
+    "icon": "electron scripts/render-icon.js && ./scripts/make-icns.sh"
+  },
+  "author": "Or Grunebaum",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^44.4.1",
+    "electron-builder": "^26.15.3"
+  },
+  "productName": "X-T50 Recipe Matcher",
+  "build": {
+    "appId": "com.orgrunebaum.xt50recipe",
+    "productName": "X-T50 Recipe Matcher",
+    "files": [
+      "main.js",
+      "index.html",
+      "style.css",
+      "analyzer.js",
+      "exif.js",
+      "renderer.js",
+      "package.json",
+      "fonts/**",
+      "manifest.webmanifest",
+      "icon-192.png",
+      "icon-512.png",
+      "apple-touch-icon.png",
+      "sw.js"
+    ],
+    "mac": {
+      "category": "public.app-category.photography",
+      "target": [
+        "dir"
+      ],
+      "identity": null,
+      "icon": "build/icon.icns"
+    },
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orgrune/xt50-recipe-matcher.git"
+  },
+  "homepage": "https://orgrune.github.io/xt50-recipe-matcher/"
+}
