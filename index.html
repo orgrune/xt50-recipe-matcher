@@ -9,7 +9,7 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
   <header class="titlebar">
@@ -87,10 +87,10 @@
             <div class="card-title">Settings to change</div>
             <div id="changeCount" class="chip"></div>
           </div>
-          <table class="settings"><colgroup><col class="c-set"><col><col><col></colgroup>
-            <thead><tr><th>Setting</th><th>Set to</th><th>You have</th><th></th></tr></thead>
-            <tbody id="settingsBody"></tbody>
-          </table>
+          <div class="settings">
+            <div class="settings-head"><span>Setting</span><span>Set to</span><span>You have</span><span></span></div>
+            <div id="settingsBody"></div>
+          </div>
         </div>
 
         <div id="notesCard" class="card">
@@ -169,8 +169,8 @@
 
   <div id="toast" class="toast" hidden></div>
 
-  <script src="exif.js"></script>
-  <script src="analyzer.js"></script>
-  <script src="renderer.js"></script>
+  <script src="exif.js?v=3"></script>
+  <script src="analyzer.js?v=3"></script>
+  <script src="renderer.js?v=3"></script>
 </body>
 </html>

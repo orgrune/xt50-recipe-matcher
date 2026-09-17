@@ -136,12 +136,12 @@
       const rec = R.settings[r.key], cur = current[r.key];
       const same = r.eq ? r.eq(rec, cur) : rec === cur;
       if (!same) changes++;
-      return `<tr class="${same ? '' : 'diff'}">
-        <td><div class="s-name">${r.name}</div><div class="s-path">${r.path}</div><div class="s-why">${escapeHtml(R.reasons[r.key] || '')}</div></td>
-        <td class="val" data-label="Set to">${r.fmt(rec)}</td>
-        <td class="val cur" data-label="You have">${r.fmt(cur)}</td>
-        <td><span class="tag ${same ? 'same' : ''}">${same ? 'keep' : 'change'}</span></td>
-      </tr>`;
+      return `<div class="srow ${same ? '' : 'diff'}">
+        <div class="s-info"><div class="s-name">${r.name}</div><div class="s-path">${r.path}</div><div class="s-why">${escapeHtml(R.reasons[r.key] || '')}</div></div>
+        <div class="val" data-label="Set to">${r.fmt(rec)}</div>
+        <div class="val cur" data-label="You have">${r.fmt(cur)}</div>
+        <div class="s-tag"><span class="tag ${same ? 'same' : ''}">${same ? 'keep' : 'change'}</span></div>
+      </div>`;
     });
     $('settingsBody').innerHTML = rows.join('');
     const cc = $('changeCount');

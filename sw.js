@@ -1,7 +1,7 @@
 /* Service worker: caches the app shell so the web version works offline.
    App files are network-first (so updates land), fonts and icons cache-first. */
-const VERSION = 'xt50-v2';
-const SHELL = ['./', 'index.html', 'style.css', 'renderer.js', 'analyzer.js', 'exif.js', 'manifest.webmanifest',
+const VERSION = 'xt50-v3';
+const SHELL = ['./', 'index.html', 'style.css?v=3', 'renderer.js?v=3', 'analyzer.js?v=3', 'exif.js?v=3', 'manifest.webmanifest',
   'icon-192.png', 'icon-512.png', 'apple-touch-icon.png',
   'fonts/inter-latin-400-normal.woff2', 'fonts/inter-latin-500-normal.woff2', 'fonts/inter-latin-600-normal.woff2',
   'fonts/inter-latin-700-normal.woff2', 'fonts/space-mono-latin-400-normal.woff2', 'fonts/space-mono-latin-700-normal.woff2'];

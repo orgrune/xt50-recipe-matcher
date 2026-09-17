@@ -122,17 +122,16 @@ button { font: inherit; color: inherit; }
 .alt { font-size: 12px; border: 1px solid var(--border); background: var(--background); border-radius: 999px; padding: 3px 10px; color: var(--muted-fg); }
 .alt b { color: var(--foreground); font-weight: 500; }
 
-.settings { width: 100%; border-collapse: collapse; font-size: 13px; }
-.settings col.c-set { width: 46%; }
-.settings th { text-align: left; font-family: var(--mono); letter-spacing: .05em; text-transform: uppercase; font-size: 11px; color: var(--muted-fg); font-weight: 400; padding: 4px 8px; border-bottom: 1px solid var(--border); }
-.settings td { padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
-.settings tr:last-child td { border-bottom: 0; }
-.settings tr.diff td { background: var(--primary-soft); }
-.settings tr.diff td:first-child { box-shadow: inset 3px 0 0 var(--primary); }
+.settings { font-size: 13px; }
+.settings-head, .srow { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 27fr) minmax(0, 27fr) auto; gap: 0 10px; align-items: start; padding: 8px; border-bottom: 1px solid var(--border); }
+.settings-head { font-family: var(--mono); letter-spacing: .05em; text-transform: uppercase; font-size: 11px; color: var(--muted-fg); padding-top: 4px; padding-bottom: 4px; }
+.srow:last-child { border-bottom: 0; }
+.srow.diff { background: var(--primary-soft); box-shadow: inset 3px 0 0 var(--primary); }
+.s-info { min-width: 0; }
 .s-name { font-weight: 600; }
 .s-path { color: var(--muted-fg); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-why { color: var(--muted-fg); font-size: 11.5px; margin-top: 2px; }
-.val { font: 13px var(--mono); white-space: nowrap; }
+.val { font: 13px var(--mono); white-space: normal; overflow-wrap: anywhere; min-width: 0; }
 .val.cur { color: var(--muted-fg); }
 .chip { font: 11px var(--mono); letter-spacing: .05em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; background: var(--background); color: var(--muted-fg); border: 1px solid var(--border); }
 .chip.hot { background: var(--primary); color: var(--primary-fg); border-color: transparent; }
@@ -227,7 +226,7 @@ body.web .main, body.web .guide { height: auto; min-height: calc(100% - var(--he
   .upload-foot { font-size: 12px; }
 
   /* recipe before image, single column, no inner scroll areas */
-  .main { display: flex; flex-direction: column; gap: 12px; padding: 12px 16px; }
+  .main { display: flex; flex-direction: column; gap: 12px; padding: 12px 16px calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px); }
   .left, .right { overflow: visible; min-height: 0; padding-right: 0; }
   .right { order: 1; }
   .left { order: 2; }
@@ -249,14 +248,11 @@ body.web .main, body.web .guide { height: auto; min-height: calc(100% - var(--he
   .hero-row { flex-wrap: wrap; }
   .dial { font-size: 11px; }
 
-  /* settings table becomes a stack of cards */
-  .settings thead, .settings colgroup { display: none; }
-  .settings, .settings tbody { display: block; }
-  .settings tr { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px 12px; align-items: end; padding: 10px 10px 12px; border-bottom: 1px solid var(--border); margin: 0 -6px; }
-  .settings tr:last-child { border-bottom: 0; }
-  .settings td { display: block; padding: 0; border: 0; background: none !important; box-shadow: none !important; }
-  .settings td:first-child { grid-column: 1 / -1; }
-  .settings tr.diff { background: var(--primary-soft); box-shadow: inset 3px 0 0 var(--primary); border-radius: 0 6px 6px 0; }
+  /* settings rows become stacked cards */
+  .settings-head { display: none; }
+  .srow { grid-template-columns: 1fr 1fr auto; gap: 6px 12px; align-items: end; padding: 10px 10px 12px; margin: 0 -6px; }
+  .srow.diff { border-radius: 0 6px 6px 0; }
+  .s-info { grid-column: 1 / -1; }
   .settings .s-path { white-space: normal; }
   .settings .val { font-size: 15px; white-space: normal; }
   .settings .val::before { content: attr(data-label); display: block; font: 10px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: 2px; }
