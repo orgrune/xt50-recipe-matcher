@@ -68,6 +68,8 @@
     render();
     if (!$('guide').hidden) renderGuide();
     $('btnCopy').disabled = false;
+    $('mobileCopy').classList.remove('disabled');
+    window.scrollTo(0, 0);
     toast(`Analysed ${lastFileName} in ${Math.round(performance.now() - t0)} ms`);
   }
 
@@ -134,8 +136,8 @@
       if (!same) changes++;
       return `<tr class="${same ? '' : 'diff'}">
         <td><div class="s-name">${r.name}</div><div class="s-path">${r.path}</div><div class="s-why">${escapeHtml(R.reasons[r.key] || '')}</div></td>
-        <td class="val">${r.fmt(rec)}</td>
-        <td class="val cur">${r.fmt(cur)}</td>
+        <td class="val" data-label="Set to">${r.fmt(rec)}</td>
+        <td class="val cur" data-label="You have">${r.fmt(cur)}</td>
         <td><span class="tag ${same ? 'same' : ''}">${same ? 'keep' : 'change'}</span></td>
       </tr>`;
     });
@@ -234,6 +236,8 @@
     $('guide').hidden = !on;
     if (lastRecipe) $('main').hidden = on; else $('uploader').hidden = on;
     $('btnGuide').classList.toggle('btn-on', on);
+    $('mobileGuide').classList.toggle('active', on);
+    window.scrollTo(0, 0);
     if (on) renderGuide();
   }
 
@@ -307,6 +311,15 @@
   if (!isElectron && 'serviceWorker' in navigator && /^https?:/.test(location.protocol)) {
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline cache is optional */ });
   }
+
+  // ---------- mobile ----------
+  const isPhone = window.matchMedia('(max-width: 700px)');
+  if (isPhone.matches) $('analysis').open = false;
+  document.querySelectorAll('[data-proxy]').forEach((b) => b.addEventListener('click', () => {
+    const t = $(b.dataset.proxy);
+    if (t.disabled) { toast('Drop or pick an image first'); return; }
+    t.click();
+  }));
 
   // ---------- wiring ----------
   const dz = $('dropzone'), uc = $('uploadCard');

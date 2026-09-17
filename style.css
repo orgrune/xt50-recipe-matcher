@@ -179,14 +179,108 @@ button { font: inherit; color: inherit; }
 .dial-table tr.hl td { background: var(--primary-soft); color: var(--primary); }
 .dial-table tr.hl td:first-child { box-shadow: inset 3px 0 0 var(--primary); }
 
-@media (max-width: 700px) { .current-form { grid-template-columns: 1fr; } .titlebar { padding-left: 80px; } }
 
 /* Web build: no macOS traffic lights, so no left inset; header is not a drag region. */
 body.web .titlebar { padding-left: 24px; -webkit-app-region: no-drag; }
 body.web { overflow: auto; }
 body.web .main, body.web .guide { height: auto; min-height: calc(100% - var(--header-h)); }
+
+/* ---- analysis collapsible (summary only visible on phones) ---- */
+.analysis-summary { display: none; }
+.analysis > summary::-webkit-details-marker { display: none; }
+
+/* ---- mobile bottom bar (hidden on desktop) ---- */
+.mobile-nav { display: none; }
+
+/* =====================================================================
+   Phone layout (≤ 700px): sticky compact header, bottom tab bar, recipe first,
+   settings as cards, image analysis collapsed under the preview.
+   ===================================================================== */
 @media (max-width: 700px) {
-  body.web .titlebar { height: auto; flex-wrap: wrap; gap: 10px; padding: 14px 16px; }
-  body.web .brand { font-size: 20px; }
-  body.web .main { padding: 12px 16px 24px; }
+  :root { --header-h: 56px; --nav-h: 64px; }
+  body, body.web { overflow: auto; -webkit-overflow-scrolling: touch; }
+
+  .titlebar { position: sticky; top: 0; z-index: 10; height: var(--header-h); padding: 0 16px; -webkit-app-region: no-drag; }
+  .brand { font-size: 20px; }
+  .titlebar .actions { display: none; }
+
+  .mobile-nav {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
+    height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding: 0 8px env(safe-area-inset-bottom);
+    background: var(--card); border-top: 1px solid var(--border);
+  }
+  .mobile-nav button {
+    flex: 1; background: none; border: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    color: var(--muted-fg); font: 11px var(--mono); letter-spacing: .05em; text-transform: uppercase; padding: 0; cursor: pointer;
+  }
+  .mobile-nav button svg { width: 22px; height: 22px; }
+  .mobile-nav button.active { color: var(--primary); }
+  .mobile-nav button.disabled { opacity: .45; }
+
+  .uploader, .main, .guide { height: auto; min-height: 0; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px); }
+  .uploader { padding: 16px 16px calc(var(--nav-h) + 24px); align-items: stretch; }
+  .upload-card { aspect-ratio: auto; min-height: calc(100vh - var(--header-h) - var(--nav-h) - 32px); padding: 32px 20px; }
+  .upload-title { font-size: 22px; }
+  .upload-desc { font-size: 14px; margin-bottom: 24px; }
+  .upload-foot { font-size: 12px; }
+
+  /* recipe before image, single column, no inner scroll areas */
+  .main { display: flex; flex-direction: column; gap: 12px; padding: 12px 16px; }
+  .left, .right { overflow: visible; min-height: 0; padding-right: 0; }
+  .right { order: 1; }
+  .left { order: 2; }
+
+  .dropzone { border-radius: 8px; }
+  .preview { max-height: 34vh; width: 100%; object-fit: cover; }
+  .analysis-summary { display: flex; justify-content: space-between; align-items: center; gap: 8px; cursor: pointer; list-style: none; padding: 12px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; font-weight: 600; }
+  .analysis-summary .mono { font-size: 10px; }
+  .analysis[open] .analysis-summary { border-radius: 8px 8px 0 0; border-bottom: 0; }
+  .analysis[open] > .row, .analysis[open] > .card { border-top-left-radius: 0; border-top-right-radius: 0; }
+  .analysis > .row { grid-template-columns: 1fr; gap: 0; }
+  .analysis > .row .card:first-child { border-radius: 0; border-bottom: 0; }
+  .analysis > .row .card:last-child { border-radius: 0; }
+  .analysis > .card:last-child { border-radius: 0 0 8px 8px; border-top: 0; }
+  .features { grid-template-columns: 1fr 1fr; }
+
+  .hero { padding: 16px; }
+  .hero-name { font-size: 24px; }
+  .hero-row { flex-wrap: wrap; }
+  .dial { font-size: 11px; }
+
+  /* settings table becomes a stack of cards */
+  .settings thead, .settings colgroup { display: none; }
+  .settings, .settings tbody { display: block; }
+  .settings tr { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px 12px; align-items: end; padding: 10px 10px 12px; border-bottom: 1px solid var(--border); margin: 0 -6px; }
+  .settings tr:last-child { border-bottom: 0; }
+  .settings td { display: block; padding: 0; border: 0; background: none !important; box-shadow: none !important; }
+  .settings td:first-child { grid-column: 1 / -1; }
+  .settings tr.diff { background: var(--primary-soft); box-shadow: inset 3px 0 0 var(--primary); border-radius: 0 6px 6px 0; }
+  .settings .s-path { white-space: normal; }
+  .settings .val { font-size: 15px; white-space: normal; }
+  .settings .val::before { content: attr(data-label); display: block; font: 10px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: 2px; }
+  .settings .tag { font-size: 10px; }
+
+  .banner { flex-direction: column; align-items: stretch; }
+  .banner .small-btn { width: 100%; padding: 10px; }
+
+  /* guide */
+  .guide { padding: 16px 16px calc(var(--nav-h) + 24px); }
+  .guide-head { flex-direction: column; align-items: stretch; }
+  .guide-head .actions { display: flex; }
+  .guide-head .actions .btn { flex: 1; padding: 12px; }
+  .guide-title { font-size: 22px; }
+
+  /* settings dialog becomes a bottom sheet */
+  .modal { align-items: flex-end; }
+  .modal-panel { width: 100%; max-width: 100%; max-height: 92vh; border-radius: 16px 16px 0 0; padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); }
+  .modal-head { flex-direction: column; }
+  .modal-head .actions { display: flex; width: 100%; }
+  .modal-head .actions .btn { flex: 1; padding: 12px; }
+  .current-form { grid-template-columns: 1fr; gap: 0; }
+  .current-form label { padding: 10px 0; }
+  .current-form select, .current-form input { width: 52%; font-size: 14px; padding: 8px; }
+  .current-form .pair { width: 52%; }
+  .current-form .pair input, .current-form .pair select { width: 50%; }
+
+  .toast { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px); max-width: calc(100% - 32px); text-align: center; }
 }
