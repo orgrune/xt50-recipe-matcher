@@ -404,7 +404,7 @@
     const ev = clamp(roundThird((s.meanY - 0.44) / 0.09), -2, 2);
     set('exposureComp', ev, `Mean luminance ${Math.round(s.meanY * 100)}% (mid-grey is about 44%).`);
 
-    if (!best.onDial) R.notes.push(`${best.name} is not a fixed position on the Film Simulation dial: assign it to FS1, FS2 or FS3 (IQ › FILM SIMULATION DIAL SETTING) or use the C position and pick it in the menu.`);
+    if (!best.onDial) R.notes.push(`${best.name} has no position on the Film Simulation dial. Either assign it to FS1, FS2 or FS3 (IQ › FILM SIMULATION DIAL SETTING), or turn the dial to C, the last click after FS3, which tells the camera to take the film simulation from IQ › FILM SIMULATION or your custom bank instead of the dial.`);
     return R;
   }
 

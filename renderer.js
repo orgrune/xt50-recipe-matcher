@@ -112,7 +112,9 @@
     $('uploader').hidden = true; $('main').hidden = $('guide').hidden ? false : true; $('result').hidden = false; $('analysis').hidden = false;
 
     $('heroName').textContent = R.filmSim.name;
-    $('heroDial').textContent = R.filmSim.onDial ? 'On the dial' : 'Dial: FS1–FS3 or C';
+    const dial = $('heroDial');
+    dial.textContent = R.filmSim.onDial ? 'On the dial' : 'Not on the dial';
+    dial.title = R.filmSim.onDial ? 'This simulation has its own position on the Film Simulation dial.' : 'Assign it to FS1, FS2 or FS3, or turn the dial to C (the last click after FS3) and choose it under IQ › FILM SIMULATION.';
     $('heroDesc').textContent = R.filmSim.desc;
     $('confFill').style.width = `${Math.round(R.confidence * 100)}%`;
     $('confText').textContent = `${Math.round(R.confidence * 100)}% fit`;
@@ -225,7 +227,7 @@
     }
     const nameHint = R ? `${R.filmSim.name.split(' ')[0]} ${lastFileName.replace(/\.[^.]+$/, '')}`.slice(0, 20) : 'e.g. NostalgicNeg warm';
     $('bankName').textContent = nameHint;
-    $('dialTable').innerHTML = FILM_SIMS.map(f => `<tr class="${R && R.filmSim.id === f.id ? 'hl' : ''}"><td>${f.name}</td><td>${f.onDial ? 'On the dial' : 'FS1–FS3 or C position'}</td></tr>`).join('') + '<tr><td>Sepia</td><td>FS1–FS3 or C position</td></tr>';
+    $('dialTable').innerHTML = FILM_SIMS.map(f => `<tr class="${R && R.filmSim.id === f.id ? 'hl' : ''}"><td>${f.name}</td><td>${f.onDial ? 'Own dial position' : 'Assign to FS1–FS3, or dial on C + menu'}</td></tr>`).join('') + '<tr><td>Sepia</td><td>Assign to FS1–FS3, or dial on C + menu</td></tr>';
   }
 
   function guideText() {
